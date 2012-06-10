@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/main_favorite_button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="onButtonClicked"
+        android:text="@string/favorite_button_label" />
+
+    <Button
+        android:id="@+id/main_bus_button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:onClick="onButtonClicked"
+        android:text="@string/bus_button_label" />
+
+    <Button
+        android:id="@+id/main_train_button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:enabled="false"
+        android:onClick="onButtonClicked"
+        android:text="@string/train_button_label" />
+
+</LinearLayout>

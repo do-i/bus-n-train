@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal" >
+    
+
+    <TextView
+        android:id="@+id/direction_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical"
+        android:text="Direction"
+        android:textSize="18sp" >
+    </TextView>
+    
+</LinearLayout>
