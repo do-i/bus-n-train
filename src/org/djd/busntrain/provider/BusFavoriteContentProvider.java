@@ -16,76 +16,77 @@ import android.net.Uri;
 
 public class BusFavoriteContentProvider extends ContentProvider {
 
-	/**
-    * 
-    */
-	public static final String BUS_FAVORITE_TABLE_NAME = "BUS_FAVORITE";
+  /**
+   *
+   */
+  public static final String BUS_FAVORITE_TABLE_NAME = "BUS_FAVORITE";
 
-	public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.djd.busntrans.bus.favorite";
-	private static final String AUTHORITY = "org.djd.busntrain.provider.busfavoritecontentprovider";
-	private static final String PATH_BUS_FAVORITE = "/busfavorite/";
-	public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_BUS_FAVORITE);
+  public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.djd.busntrans.bus.favorite";
+  private static final String AUTHORITY = "org.djd.busntrain.provider.busfavoritecontentprovider";
+  private static final String PATH_BUS_FAVORITE = "/busfavorite/";
+  public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_BUS_FAVORITE);
 
-	private SQLiteDatabase database;
+  private SQLiteDatabase database;
 
-	private static final int BUS_FAVORITE = 1;
+  private static final int BUS_FAVORITE = 1;
 
-	private static final UriMatcher URI_MATCHER;
-	static {
-		URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
-		URI_MATCHER.addURI(AUTHORITY, PATH_BUS_FAVORITE, BUS_FAVORITE);
-	}
+  private static final UriMatcher URI_MATCHER;
 
-	@Override
-	public String getType(Uri uri) {
-		switch (URI_MATCHER.match(uri)) {
-		case BUS_FAVORITE:
-			return CONTENT_TYPE;
-		default:
-			throw new IllegalArgumentException("Unsupported URI: " + uri);
-		}
-	}
+  static {
+    URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+    URI_MATCHER.addURI(AUTHORITY, PATH_BUS_FAVORITE, BUS_FAVORITE);
+  }
 
-	@Override
-	public boolean onCreate() {
-		Context context = getContext();
-		AaaTableHelper dbHelper = new AaaTableHelper(context);
+  @Override
+  public String getType(Uri uri) {
+    switch (URI_MATCHER.match(uri)) {
+      case BUS_FAVORITE:
+        return CONTENT_TYPE;
+      default:
+        throw new IllegalArgumentException("Unsupported URI: " + uri);
+    }
+  }
 
-		database = dbHelper.getWritableDatabase();
-		return (null != database);
+  @Override
+  public boolean onCreate() {
+    Context context = getContext();
+    AaaTableHelper dbHelper = new AaaTableHelper(context);
 
-	}
+    database = dbHelper.getWritableDatabase();
+    return (null != database);
 
-	@Override
-	public Uri insert(Uri uri, ContentValues contentValues) {
+  }
 
-		long id = database.replace(BUS_FAVORITE_TABLE_NAME, null, contentValues);
-		if (0 <= id) {
-			Uri _uri = ContentUris.withAppendedId(CONTENT_URI, id);
-			getContext().getContentResolver().notifyChange(_uri, null);
-			return _uri;
-		}
-		throw new SQLException("Failed to insert row into " + uri);
+  @Override
+  public Uri insert(Uri uri, ContentValues contentValues) {
 
-	}
+    long id = database.replace(BUS_FAVORITE_TABLE_NAME, null, contentValues);
+    if (0 <= id) {
+      Uri _uri = ContentUris.withAppendedId(CONTENT_URI, id);
+      getContext().getContentResolver().notifyChange(_uri, null);
+      return _uri;
+    }
+    throw new SQLException("Failed to insert row into " + uri);
 
-	@Override
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		return database.query(BUS_FAVORITE_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+  }
 
-	}
+  @Override
+  public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    return database.query(BUS_FAVORITE_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
 
-	@Override
-	public int update(Uri uri, ContentValues arg1, String arg2, String[] arg3) {
-		throw new UnsupportedOperationException("TODO");
-	}
+  }
 
-	@Override
-	public int delete(Uri uri, String whereClause, String[] whereArgs) {
-		long _id = ContentUris.parseId(uri);
-		int deleteCount = database.delete(BUS_FAVORITE_TABLE_NAME, "_id=?", new String[] { String.valueOf(_id) });
-		getContext().getContentResolver().notifyChange(uri, null);
-		return deleteCount;
-	}
+  @Override
+  public int update(Uri uri, ContentValues arg1, String arg2, String[] arg3) {
+    throw new UnsupportedOperationException("TODO");
+  }
+
+  @Override
+  public int delete(Uri uri, String whereClause, String[] whereArgs) {
+    long _id = ContentUris.parseId(uri);
+    int deleteCount = database.delete(BUS_FAVORITE_TABLE_NAME, "_id=?", new String[]{String.valueOf(_id)});
+    getContext().getContentResolver().notifyChange(uri, null);
+    return deleteCount;
+  }
 
 }

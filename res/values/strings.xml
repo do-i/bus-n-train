@@ -6,7 +6,7 @@
     <color name="dark_brown">#3C3B37</color>
     <color name="darker_brown">#2D2D2D</color>
 
-    <string name="app_name">Bus-N-Train</string>
+    <string name="app_name">bus-n-train</string>
     <string name="msg_sys_no_case_defined_error">There is no case defined error occurred.</string>
     <string name="no_list_data">No data is available.</string>
     

@@ -18,45 +18,45 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class XmlUtil {
-	private static final String TAG = XmlUtil.class.getSimpleName();
+  private static final String TAG = XmlUtil.class.getSimpleName();
 
-	public static Document unmarshall(String xmlStr) throws XmlUtilException {
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-				.newInstance();
-		try {
-			DocumentBuilder documentBuilder = documentBuilderFactory
-					.newDocumentBuilder();
-			InputSource inputSource = new InputSource();
-			inputSource.setCharacterStream(new StringReader(xmlStr));
-			return documentBuilder.parse(inputSource);
+  public static Document unmarshall(String xmlStr) throws XmlUtilException {
+    DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+        .newInstance();
+    try {
+      DocumentBuilder documentBuilder = documentBuilderFactory
+          .newDocumentBuilder();
+      InputSource inputSource = new InputSource();
+      inputSource.setCharacterStream(new StringReader(xmlStr));
+      return documentBuilder.parse(inputSource);
 
-		} catch (ParserConfigurationException e) {
-			Log.e(TAG, e.getMessage(), e);
-			throw new XmlUtilException(ERROR_CODE.PARSE_ERROR);
-		} catch (SAXException e) {
-			Log.e(TAG, e.getMessage(), e);
-			throw new XmlUtilException(ERROR_CODE.SAX_ERROR);
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage(), e);
-			throw new XmlUtilException(ERROR_CODE.IO_ERROR);
-		}
+    } catch (ParserConfigurationException e) {
+      Log.e(TAG, e.getMessage(), e);
+      throw new XmlUtilException(ERROR_CODE.PARSE_ERROR);
+    } catch (SAXException e) {
+      Log.e(TAG, e.getMessage(), e);
+      throw new XmlUtilException(ERROR_CODE.SAX_ERROR);
+    } catch (IOException e) {
+      Log.e(TAG, e.getMessage(), e);
+      throw new XmlUtilException(ERROR_CODE.IO_ERROR);
+    }
 
-	}
-	
-	public static String getValue(Element element, String elementName) {
-		NodeList elements = element.getElementsByTagName(elementName);
-		if (1 != elements.getLength()) {
-			throw new IllegalStateException("TODO: handle when elements does not contain exactly one item.elementName=" + elementName);
-		}
-		Node elementNode = elements.item(0);
-		
-		NodeList children = elementNode.getChildNodes();
-		StringBuilder sb = new StringBuilder (); 
-		for(int i=0 ; i<children.getLength(); i++){
-			String value = children.item(i).getNodeValue();
-			sb.append(value);
-		}
-		
-		return sb.toString();
-	}
+  }
+
+  public static String getValue(Element element, String elementName) {
+    NodeList elements = element.getElementsByTagName(elementName);
+    if (1 != elements.getLength()) {
+      throw new IllegalStateException("TODO: handle when elements does not contain exactly one item.elementName=" + elementName);
+    }
+    Node elementNode = elements.item(0);
+
+    NodeList children = elementNode.getChildNodes();
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < children.getLength(); i++) {
+      String value = children.item(i).getNodeValue();
+      sb.append(value);
+    }
+
+    return sb.toString();
+  }
 }

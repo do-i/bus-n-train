@@ -16,74 +16,75 @@ import android.net.Uri;
 
 public class BusRouteContentProvider extends ContentProvider {
 
-	/**
-    * 
-    */
-	public static final String BUS_ROUTE_TABLE_NAME = "BUS_ROUTE";
-	
-	public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.djd.busntrans.bus.route";
-	private static final String AUTHORITY = "org.djd.busntrain.provider.busroutecontentprovider";
-	private static final String PATH_BUS_ROUTE = "/busroute/";
-	public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_BUS_ROUTE);
+  /**
+   *
+   */
+  public static final String BUS_ROUTE_TABLE_NAME = "BUS_ROUTE";
 
-	private SQLiteDatabase database;
+  public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.djd.busntrans.bus.route";
+  private static final String AUTHORITY = "org.djd.busntrain.provider.busroutecontentprovider";
+  private static final String PATH_BUS_ROUTE = "/busroute/";
+  public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_BUS_ROUTE);
 
-	private static final int BUS_ROUTE = 1;
+  private SQLiteDatabase database;
 
-	private static final UriMatcher URI_MATCHER;
-	static {
-		URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
-		URI_MATCHER.addURI(AUTHORITY, PATH_BUS_ROUTE, BUS_ROUTE);
-	}
+  private static final int BUS_ROUTE = 1;
 
-	@Override
-	public String getType(Uri uri) {
-		switch (URI_MATCHER.match(uri)) {
-		case BUS_ROUTE:
-			return CONTENT_TYPE;
-		default:
-			throw new IllegalArgumentException("Unsupported URI: " + uri);
-		}
-	}
+  private static final UriMatcher URI_MATCHER;
 
-	@Override
-	public boolean onCreate() {
-		Context context = getContext();
-		AaaTableHelper dbHelper = new AaaTableHelper(context);
+  static {
+    URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+    URI_MATCHER.addURI(AUTHORITY, PATH_BUS_ROUTE, BUS_ROUTE);
+  }
 
-		database = dbHelper.getWritableDatabase();
-		return (null != database);
+  @Override
+  public String getType(Uri uri) {
+    switch (URI_MATCHER.match(uri)) {
+      case BUS_ROUTE:
+        return CONTENT_TYPE;
+      default:
+        throw new IllegalArgumentException("Unsupported URI: " + uri);
+    }
+  }
 
-	}
+  @Override
+  public boolean onCreate() {
+    Context context = getContext();
+    AaaTableHelper dbHelper = new AaaTableHelper(context);
 
-	@Override
-	public Uri insert(Uri uri, ContentValues contentValues) {
+    database = dbHelper.getWritableDatabase();
+    return (null != database);
 
-		long id = database.replace(BUS_ROUTE_TABLE_NAME, null, contentValues);
-		if (0 <= id) {
-			Uri _uri = ContentUris.withAppendedId(CONTENT_URI, id);
-			getContext().getContentResolver().notifyChange(_uri, null);
-			return _uri;
-		}
-		throw new SQLException("Failed to insert row into " + uri);
+  }
 
-	}
+  @Override
+  public Uri insert(Uri uri, ContentValues contentValues) {
 
-	@Override
-	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		return database.query(BUS_ROUTE_TABLE_NAME, projection, selection, selectionArgs,
-		      null, null, sortOrder);
+    long id = database.replace(BUS_ROUTE_TABLE_NAME, null, contentValues);
+    if (0 <= id) {
+      Uri _uri = ContentUris.withAppendedId(CONTENT_URI, id);
+      getContext().getContentResolver().notifyChange(_uri, null);
+      return _uri;
+    }
+    throw new SQLException("Failed to insert row into " + uri);
 
-	}
+  }
 
-	@Override
-	public int update(Uri uri, ContentValues arg1, String arg2, String[] arg3) {
-		throw new UnsupportedOperationException("TODO");
-	}
+  @Override
+  public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    return database.query(BUS_ROUTE_TABLE_NAME, projection, selection, selectionArgs,
+        null, null, sortOrder);
 
-	@Override
-	public int delete(Uri uri, String whereClause, String[] whereArgs) {
-		return database.delete(BUS_ROUTE_TABLE_NAME, whereClause, whereArgs);
-	}
+  }
+
+  @Override
+  public int update(Uri uri, ContentValues arg1, String arg2, String[] arg3) {
+    throw new UnsupportedOperationException("TODO");
+  }
+
+  @Override
+  public int delete(Uri uri, String whereClause, String[] whereArgs) {
+    return database.delete(BUS_ROUTE_TABLE_NAME, whereClause, whereArgs);
+  }
 
 }

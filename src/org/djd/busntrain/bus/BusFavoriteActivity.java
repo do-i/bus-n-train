@@ -22,90 +22,90 @@ import android.widget.Toast;
 
 public class BusFavoriteActivity extends ListActivity implements OnItemLongClickListener {
 
-	private static final String TAG = BusFavoriteActivity.class.getSimpleName();
+  private static final String TAG = BusFavoriteActivity.class.getSimpleName();
 
-	private static final int[] VIEW_FAVORITE_ID_ARRAY = new int[] { R.id.favorite_route, R.id.favorite_stop_id,
-	      R.id.favorite_route_name, R.id.favorite_direction, R.id.favorite_stop_name };
+  private static final int[] VIEW_FAVORITE_ID_ARRAY = new int[]{R.id.favorite_route, R.id.favorite_stop_id,
+      R.id.favorite_route_name, R.id.favorite_direction, R.id.favorite_stop_name};
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.common_list_view);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.common_list_view);
 
-		
-		getListView().setOnItemLongClickListener(this);
-		displayListItems();
-	}
 
-	/**
-	 * @return true so that onLIstItemClick handler won't be called.
-	 */
-	@Override
-	public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+    getListView().setOnItemLongClickListener(this);
+    displayListItems();
+  }
 
-		Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+  /**
+   * @return true so that onLIstItemClick handler won't be called.
+   */
+  @Override
+  public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-		final BusFavoriteEntity busFavoriteEntity = BusFavoriteEntity.Helper.createBusFavoriteEntity(cursor, position);
+    Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
 
-		new AlertDialog.Builder(this).setTitle(R.string.msg_delete_dialog_title).setMessage(busFavoriteEntity.stopName)
-		      .setPositiveButton(R.string.btn_delete, new DialogInterface.OnClickListener() {
+    final BusFavoriteEntity busFavoriteEntity = BusFavoriteEntity.Helper.createBusFavoriteEntity(cursor, position);
 
-			      @Override
-			      public void onClick(DialogInterface dialog, int which) {
-				      ContentResolver contentResolver = getContentResolver();
-				      //
-				      Uri uri = Uri.withAppendedPath(BusFavoriteContentProvider.CONTENT_URI, String.valueOf(busFavoriteEntity.id));
-						
-				      int deleteCount = contentResolver.delete(uri, null, null);
-				      if(1 == deleteCount){
-				      	
-				      	Toast.makeText(getBaseContext(), "Item deleted.", Toast.LENGTH_SHORT).show();
-				      	displayListItems();
-				      }
-				      
-			      }
+    new AlertDialog.Builder(this).setTitle(R.string.msg_delete_dialog_title).setMessage(busFavoriteEntity.stopName)
+        .setPositiveButton(R.string.btn_delete, new DialogInterface.OnClickListener() {
 
-		      }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            ContentResolver contentResolver = getContentResolver();
+            //
+            Uri uri = Uri.withAppendedPath(BusFavoriteContentProvider.CONTENT_URI, String.valueOf(busFavoriteEntity.id));
 
-			      @Override
-			      public void onClick(DialogInterface dialog, int which) {
-			      	// do nothing.
-			      }
+            int deleteCount = contentResolver.delete(uri, null, null);
+            if (1 == deleteCount) {
 
-		      }).show();
+              Toast.makeText(getBaseContext(), "Item deleted.", Toast.LENGTH_SHORT).show();
+              displayListItems();
+            }
 
-		return true;
+          }
 
-	}
+        }).setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
 
-	// private CharSequence getMessage() {
-	//
-	// return "TODO: compose bus stop info.";
-	// }
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        // do nothing.
+      }
 
-	@Override
-	protected void onListItemClick(ListView listView, View v, int position, long id) {
-		super.onListItemClick(listView, v, position, id);
+    }).show();
 
-		Intent intent = new Intent(this, BusPredictionActivity.class);
-		Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+    return true;
 
-		BusFavoriteEntity busFavoriteEntity = BusFavoriteEntity.Helper.createBusFavoriteEntity(cursor, position);
-		intent.putExtra(BusFavoriteEntity.BUS_FAVORITE_ENTITY_EXTRA_DATA_KEY, busFavoriteEntity);
-		startActivity(intent);
+  }
 
-		Log.i(TAG, "favorite item selected. " + busFavoriteEntity);
-	}
+  // private CharSequence getMessage() {
+  //
+  // return "TODO: compose bus stop info.";
+  // }
 
-	private void displayListItems() {
+  @Override
+  protected void onListItemClick(ListView listView, View v, int position, long id) {
+    super.onListItemClick(listView, v, position, id);
 
-		Cursor cursor = managedQuery(BusFavoriteContentProvider.CONTENT_URI, BusFavoriteEntity.Columns.FULL_PROJECTION,
-		      null, null, BusFavoriteEntity.Columns._ID);
+    Intent intent = new Intent(this, BusPredictionActivity.class);
+    Cursor cursor = (Cursor) listView.getItemAtPosition(position);
 
-		ListAdapter listAdapter = new SimpleCursorAdapter(this, R.layout.favorite_list_item_view, cursor,
-		      BusFavoriteEntity.Columns.LIST_VIEW_PROJECTION, VIEW_FAVORITE_ID_ARRAY);
+    BusFavoriteEntity busFavoriteEntity = BusFavoriteEntity.Helper.createBusFavoriteEntity(cursor, position);
+    intent.putExtra(BusFavoriteEntity.BUS_FAVORITE_ENTITY_EXTRA_DATA_KEY, busFavoriteEntity);
+    startActivity(intent);
 
-		setListAdapter(listAdapter);
-	}
+    Log.i(TAG, "favorite item selected. " + busFavoriteEntity);
+  }
+
+  private void displayListItems() {
+
+    Cursor cursor = managedQuery(BusFavoriteContentProvider.CONTENT_URI, BusFavoriteEntity.Columns.FULL_PROJECTION,
+        null, null, BusFavoriteEntity.Columns._ID);
+
+    ListAdapter listAdapter = new SimpleCursorAdapter(this, R.layout.favorite_list_item_view, cursor,
+        BusFavoriteEntity.Columns.LIST_VIEW_PROJECTION, VIEW_FAVORITE_ID_ARRAY);
+
+    setListAdapter(listAdapter);
+  }
 
 }

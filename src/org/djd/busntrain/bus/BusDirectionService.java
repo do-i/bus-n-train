@@ -10,37 +10,37 @@ import android.util.Log;
 
 public class BusDirectionService extends IntentService {
 
-	private static final String TAG = BusDirectionService.class.getSimpleName();
+  private static final String TAG = BusDirectionService.class.getSimpleName();
 
-	public BusDirectionService() {
-		super(TAG);
-	}
+  public BusDirectionService() {
+    super(TAG);
+  }
 
-	@Override
-	protected void onHandleIntent(Intent intent) {
+  @Override
+  protected void onHandleIntent(Intent intent) {
 
-		String routeTxt = intent.getDataString();
-		Log.i(TAG, "routeTxt=" + routeTxt);
-		String urlTxt = StringUtil.getBusDirectionUrl(this, routeTxt);
-		Log.i(TAG, "url=" + urlTxt);
-		try {
-			String responseXmlTxt = Downloader.getAsString(urlTxt);
-			broadcase(responseXmlTxt);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    String routeTxt = intent.getDataString();
+    Log.i(TAG, "routeTxt=" + routeTxt);
+    String urlTxt = StringUtil.getBusDirectionUrl(this, routeTxt);
+    Log.i(TAG, "url=" + urlTxt);
+    try {
+      String responseXmlTxt = Downloader.getAsString(urlTxt);
+      broadcase(responseXmlTxt);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-	}
+  }
 
-	private void broadcase(String responseXmlTxt) {
-		Intent responseIntent = new Intent();
+  private void broadcase(String responseXmlTxt) {
+    Intent responseIntent = new Intent();
 
-		responseIntent.setAction(BusDirectionActivityBroadcastReceiver.ACTION_RESPONSE);
-		responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
-		responseIntent.putExtra(BusDirectionActivityBroadcastReceiver.XML_DATA_TXT, responseXmlTxt);
+    responseIntent.setAction(BusDirectionActivityBroadcastReceiver.ACTION_RESPONSE);
+    responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
+    responseIntent.putExtra(BusDirectionActivityBroadcastReceiver.XML_DATA_TXT, responseXmlTxt);
 
-		sendBroadcast(responseIntent);
-	}
+    sendBroadcast(responseIntent);
+  }
 
 }
