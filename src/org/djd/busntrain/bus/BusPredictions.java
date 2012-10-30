@@ -73,23 +73,13 @@ public class BusPredictions {
         Date curDate = BUS_TIME_PATTERN.parse(curTime);
         Date prdDate = BUS_TIME_PATTERN.parse(prdTime);
         long diffInMilliSec = prdDate.getTime() - curDate.getTime();
-//				Log.i(TAG, "diffInMilliSec=" + diffInMilliSec);
         double diffInMilliSecDouble = (double) diffInMilliSec;
         double diffInSecDouble = diffInMilliSecDouble / 1000.0;
         double diffInMinDouble = diffInSecDouble / 60.0;
-
-//				Log.i(TAG, "diffInMilliSecDouble=" + diffInMilliSecDouble);
-//				Log.i(TAG, "diffInSecDouble=" + diffInSecDouble);
-//				Log.i(TAG, "diffInMinDouble=" + diffInMinDouble);
         diffInMinDouble = Math.floor(diffInMinDouble);
-//				Log.i(TAG, "floor_diffInMinDouble=" + diffInMinDouble);
-
         int diffInMinutes = (int) diffInMinDouble;
-//				Log.i(TAG, "diffInMinutes=" + diffInMinutes);
-
         // practical adjustment
         --diffInMinutes;
-
         if (1 >= diffInMinutes) {
           return "Due";
         }

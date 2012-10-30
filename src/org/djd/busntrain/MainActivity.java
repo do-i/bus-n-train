@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import org.djd.busntrain.train.TrainRouteActivity;
+import org.djd.busntrain.train.TrainTestActivity;
 
 public class MainActivity extends Activity {
 
@@ -35,8 +37,9 @@ public class MainActivity extends Activity {
         intent = new Intent(this, BusRouteActivity.class);
         break;
       case R.id.main_train_button_id:
-        Toast.makeText(this, "Not Supported Yet.", Toast.LENGTH_SHORT).show();
-        return;
+        intent = new Intent(this, TrainRouteActivity.class);
+        Toast.makeText(this, "In Beta.", Toast.LENGTH_SHORT).show();
+        break;
     }
 
     if (null != intent) {

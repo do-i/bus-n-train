@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+
+        >
+
+
+    <TextView
+            android:id="@+id/train_route_red_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_red"
+            android:text="@string/train_route_red"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+    <TextView
+            android:id="@+id/train_route_blue_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_blue"
+            android:text="@string/train_route_blue"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+    <TextView
+            android:id="@+id/train_route_brown_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_brown"
+            android:text="@string/train_route_brown"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+
+    <TextView
+            android:id="@+id/train_route_green_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_green"
+            android:text="@string/train_route_green"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+    <TextView
+            android:id="@+id/train_route_orange_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_orange"
+            android:text="@string/train_route_orange"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+    <TextView
+            android:id="@+id/train_route_purple_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_purple"
+            android:text="@string/train_route_purple"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+
+    <TextView
+            android:id="@+id/train_route_pink_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_pink"
+            android:text="@string/train_route_pink"
+            android:textColor="@color/train_txt_color_white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+
+
+    <TextView
+            android:id="@+id/train_route_yellow_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/train_yellow"
+            android:text="@string/train_route_yellow"
+            android:textColor="@color/train_txt_color_black"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:onClick="onClick"
+            />
+</LinearLayout>

@@ -6,6 +6,18 @@
     <color name="dark_brown">#3C3B37</color>
     <color name="darker_brown">#2D2D2D</color>
 
+    <color name="train_red">#c60c30</color>
+    <color name="train_blue">#00a1de</color>
+    <color name="train_brown">#62361b</color>
+    <color name="train_green">#009b3a</color>
+    <color name="train_orange">#f9461c</color>
+    <color name="train_purple">#522398</color>
+    <color name="train_pink">#e27ea6</color>
+    <color name="train_yellow">#f9e300</color>
+
+    <color name="train_txt_color_white">#FFFFFF</color>
+    <color name="train_txt_color_black">#000000</color>
+
     <string name="app_name">bus-n-train</string>
     <string name="msg_sys_no_case_defined_error">There is no case defined error occurred.</string>
     <string name="no_list_data">No data is available.</string>
@@ -32,4 +44,14 @@
     
     <string name="favorite_button_label">Favorite</string>
     <string name="train_button_label">Train</string>
+
+    <string name="train_route_red">Red Line</string>
+    <string name="train_route_blue">Blue Line</string>
+    <string name="train_route_brown">Brown Line</string>
+    <string name="train_route_green">Green Line</string>
+    <string name="train_route_orange">Orange Line</string>
+    <string name="train_route_purple">Purple Line</string>
+    <string name="train_route_pink">Pink Line</string>
+    <string name="train_route_yellow">Yellow Line</string>
+
 </resources>
