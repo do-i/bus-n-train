@@ -2,6 +2,8 @@ package org.djd.busntrain.commons;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.TextView;
 
 public final class ApplicationCommons {
 
@@ -34,9 +36,20 @@ public final class ApplicationCommons {
   }
 
   public static void setBusRouteLastUpdate(final Context context) {
-
     SharedPreferences settings = getSharedPreferences(context);
     settings.edit().putLong(PREFERENCE_KEY_BUS_ROUTE_LAST_UPDATE_TIME, System.currentTimeMillis()).commit();
+  }
+
+
+  public static void setTextToTextView(View view, int targetResourceId, String text) {
+    TextView stopNameTextView = (TextView) view.findViewById(targetResourceId);
+    if (stopNameTextView != null) {
+      stopNameTextView.setText(text);
+    }
+  }
+
+  public static void setTextToTextView(View view, int targetResourceId, int text) {
+    setTextToTextView(view, targetResourceId, String.valueOf(text));
   }
 
   private static SharedPreferences getSharedPreferences(final Context context) {

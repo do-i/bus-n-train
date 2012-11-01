@@ -34,6 +34,9 @@
         <activity android:screenOrientation="portrait"
                   android:name=".train.TrainTestActivity"></activity>
         <activity android:screenOrientation="portrait" android:name=".train.TrainRouteActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".train.TrainStationActivity"/>
+
+
         <service android:name=".bus.BusRouteService">
         </service>
         <service android:name=".bus.BusDirectionService">
@@ -42,6 +45,7 @@
         </service>
 
         <service android:name=".bus.BusPredictionService"></service>
+        <service android:name=".train.TrainStationService"/>
         <provider android:name=".provider.BusRouteContentProvider"
                   android:authorities="org.djd.busntrain.provider.busroutecontentprovider"></provider>
         <provider android:name=".provider.BusFavoriteContentProvider"

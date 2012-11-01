@@ -1,12 +1,11 @@
 package org.djd.busntrain.train;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import org.djd.busntrain.R;
 
 /**
@@ -18,14 +17,31 @@ import org.djd.busntrain.R;
  * To change this template use File | Settings | File Templates.
  */
 public class TrainRouteActivity extends Activity {
+  private static final String TAG = TrainRouteActivity.class.getSimpleName();
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.train_route_list_item_view);
+    setContentView(R.layout.train_route_list_view);
   }
 
-
   public void onClick(View v) {
-    Toast.makeText(this, ((TextView)v).getText(), Toast.LENGTH_SHORT).show();
+    Intent intent = new Intent(this, TrainStationActivity.class);
+    intent.setData(Uri.parse(color(v.getId())));
+    startActivity(intent);
+  }
 
+  private String color(int viewId) {
+    switch (viewId) {
+      case R.id.train_route_red_id: return "Red/95th";
+      case R.id.train_route_blue_id: return "Blue/ForestPark";
+      case R.id.train_route_brown_id: return "Brown/Loop";
+      case R.id.train_route_green_id: return "Green/63rd";
+      case R.id.train_route_orange_id: return "Orange/Loop";
+      case R.id.train_route_purple_id: return "PurpleExp/Linden";
+      case R.id.train_route_pink_id: return "Pink/Loop";
+      case R.id.train_route_yellow_id: return "Yellow/Howard";
+      default:
+        Log.e(TAG, "Undefined viewId: " + viewId);
+        return "";
+    }
   }
 }

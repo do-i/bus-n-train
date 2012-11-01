@@ -2,8 +2,9 @@ package org.djd.busntrain.train;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,15 +13,23 @@ import java.util.List;
  * Time: 4:23 PM
  * To change this template use File | Settings | File Templates.
  */
-public class StationModel {
+public class StationModel implements Serializable {
 
-  public static final Type TYPE = new TypeToken<List<StationModel>>() {
+  public static final Type TYPE = new TypeToken<ArrayList<StationModel>>() {
   }.getType();
   private String color;
   private String destination;
   private int sequence;
   private int stopId;
   private String stopName;
+
+  public int getStopId() {
+    return stopId;
+  }
+
+  public String getStopName() {
+    return stopName;
+  }
 
   @Override
   public String toString() {
