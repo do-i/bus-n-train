@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -50,7 +49,9 @@ public class TrainStationActivity extends ListActivity {
   @Override
   protected void onListItemClick(ListView l, View v, int position, long id) {
     super.onListItemClick(l, v, position, id);
-
+    Intent intent = new Intent(this, TrainPredictionsActivity.class);
+    intent.putExtra(TrainPredictionsActivity.EXTRA_DATA_STATIONS_KEY, stations.get(position));
+    startActivity(intent);
   }
 
 

@@ -2,10 +2,13 @@ package org.djd.busntrain.commons;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import org.djd.busntrain.R;
 
 public final class ApplicationCommons {
+  private static final String TAG = ApplicationCommons.class.getSimpleName();
 
   public static final String SCHEME = "content://";
 
@@ -50,6 +53,47 @@ public final class ApplicationCommons {
 
   public static void setTextToTextView(View view, int targetResourceId, int text) {
     setTextToTextView(view, targetResourceId, String.valueOf(text));
+  }
+
+  /**
+   * Red = Red Line (Howard-95th/Dan Ryan service)
+   * Blue = Blue Line (O‖Hare-Forest Park service)
+   * Brn = Brown Line (Kimball-Loop service)
+   * G = Green Line (Harlem/Lake-Ashland/63rd-Cottage Grove service)
+   * Org = Orange Line (Midway-Loop service)
+   * P = Purple Line (Linden-Howard shuttle service)
+   * Pink = Pink Line (54th/Cermak-Loop service)
+   * Y = Yellow Line (Skokie-Howard [Skokie Swift] shuttle service)
+   */
+  public static String getColorCode(int viewId) {
+    switch (viewId) {
+      case R.id.train_route_red_id: return "Red";
+      case R.id.train_route_blue_id: return "Blue";
+      case R.id.train_route_brown_id: return "Brn";
+      case R.id.train_route_green_id: return "G";
+      case R.id.train_route_orange_id: return "O";
+      case R.id.train_route_purple_id: return "P";
+      case R.id.train_route_pink_id: return "Pink";
+      case R.id.train_route_yellow_id: return "Y";
+      default:
+        Log.e(TAG, "Undefined viewId: " + viewId);
+        return "";
+    }
+  }
+  public static String getColorDestination(int viewId) {
+    switch (viewId) {
+      case R.id.train_route_red_id: return "Red/95th";
+      case R.id.train_route_blue_id: return "Blue/ForestPark";
+      case R.id.train_route_brown_id: return "Brown/Loop";
+      case R.id.train_route_green_id: return "Green/63rd";
+      case R.id.train_route_orange_id: return "Orange/Loop";
+      case R.id.train_route_purple_id: return "PurpleExp/Linden";
+      case R.id.train_route_pink_id: return "Pink/Loop";
+      case R.id.train_route_yellow_id: return "Yellow/Howard";
+      default:
+        Log.e(TAG, "Undefined viewId: " + viewId);
+        return "";
+    }
   }
 
   private static SharedPreferences getSharedPreferences(final Context context) {

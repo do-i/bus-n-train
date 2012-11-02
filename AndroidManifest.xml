@@ -3,11 +3,8 @@
           package="org.djd.busntrain"
           android:versionCode="1"
           android:versionName="1.0">
-
     <uses-sdk android:minSdkVersion="10"/>
-
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name">
@@ -16,41 +13,28 @@
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:screenOrientation="portrait" android:name=".bus.BusRouteActivity">
-        </activity>
-        <activity android:screenOrientation="portrait" android:name=".bus.BusDirectionActivity">
-        </activity>
-        <activity android:screenOrientation="portrait" android:name=".bus.BusStopActivity">
-        </activity>
-
-        <activity android:screenOrientation="portrait"
-                  android:name=".bus.BusPredictionActivity"></activity>
-        <activity android:screenOrientation="portrait"
-                  android:name=".bus.BusFavoriteActivity"></activity>
-        <activity android:screenOrientation="portrait"
-                  android:name=".train.TrainTestActivity"></activity>
+        <activity android:screenOrientation="portrait" android:name=".bus.BusRouteActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".bus.BusDirectionActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".bus.BusStopActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".bus.BusPredictionActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".bus.BusFavoriteActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".train.TrainTestActivity"/>
         <activity android:screenOrientation="portrait" android:name=".train.TrainRouteActivity"/>
         <activity android:screenOrientation="portrait" android:name=".train.TrainStationActivity"/>
+        <activity android:screenOrientation="portrait" android:name=".train.TrainPredictionsActivity"/>
 
-
-        <service android:name=".bus.BusRouteService">
-        </service>
-        <service android:name=".bus.BusDirectionService">
-        </service>
-        <service android:name=".bus.BusStopService">
-        </service>
-
-        <service android:name=".bus.BusPredictionService"></service>
+        <service android:name=".bus.BusRouteService"/>
+        <service android:name=".bus.BusDirectionService"/>
+        <service android:name=".bus.BusStopService"/>
+        <service android:name=".bus.BusPredictionService"/>
         <service android:name=".train.TrainStationService"/>
+
         <provider android:name=".provider.BusRouteContentProvider"
-                  android:authorities="org.djd.busntrain.provider.busroutecontentprovider"></provider>
+                  android:authorities="org.djd.busntrain.provider.busroutecontentprovider"/>
         <provider android:name=".provider.BusFavoriteContentProvider"
-                  android:authorities="org.djd.busntrain.provider.busfavoritecontentprovider"></provider>
-
+                  android:authorities="org.djd.busntrain.provider.busfavoritecontentprovider"/>
     </application>
-
 </manifest>
