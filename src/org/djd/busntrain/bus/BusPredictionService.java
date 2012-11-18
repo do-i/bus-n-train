@@ -30,7 +30,7 @@ public class BusPredictionService extends IntentService {
     try {
       String responseXmlTxt = Downloader.getAsString(urlTxt);
 
-      broadcase(responseXmlTxt);
+      broadcast(responseXmlTxt);
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -38,7 +38,7 @@ public class BusPredictionService extends IntentService {
 
   }
 
-  private void broadcase(String responseXmlTxt) {
+  private void broadcast(String responseXmlTxt) {
     Intent responseIntent = new Intent();
 
     responseIntent.setAction(BusPredictionActivityBroadcastReceiver.ACTION_RESPONSE);

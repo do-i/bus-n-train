@@ -31,6 +31,7 @@
         <service android:name=".bus.BusStopService"/>
         <service android:name=".bus.BusPredictionService"/>
         <service android:name=".train.TrainStationService"/>
+        <service android:name=".train.TrainPredictionService"/>
 
         <provider android:name=".provider.BusRouteContentProvider"
                   android:authorities="org.djd.busntrain.provider.busroutecontentprovider"/>

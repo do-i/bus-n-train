@@ -1,9 +1,8 @@
 package org.djd.busntrain.commons;
 
-import org.djd.busntrain.R;
-
 import android.content.Context;
 import android.text.format.DateUtils;
+import org.djd.busntrain.R;
 
 public class StringUtil {
 
@@ -36,6 +35,12 @@ public class StringUtil {
     String url = context.getString(R.string.bus_tracker_base_url);
     String key = context.getString(R.string.bus_tracker_auth_key);
     return String.format("%sgetpredictions?key=%s&rt=%s&stpid=%s", url, key, route, stopId);
+  }
+
+  public static String getTrainPredictionUrl(Context context, Integer stopId) {
+    String url = context.getString(R.string.train_tracker_base_url);
+    String key = context.getString(R.string.train_tracker_auth_key);
+    return String.format("%skey=%s&max=10&mapid=%d", url, key, stopId);
   }
 
 }

@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import org.djd.busntrain.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.djd.busntrain.commons.ApplicationCommons.setTextToTextView;
 

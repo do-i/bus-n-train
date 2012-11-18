@@ -10,6 +10,10 @@ import org.djd.busntrain.R;
 public final class ApplicationCommons {
   private static final String TAG = ApplicationCommons.class.getSimpleName();
 
+  public static final String HEROKU_URL = "http://shielded-taiga-4473.herokuapp.com/v1/";
+  public static final String URL_STATIONS_TXT = HEROKU_URL + "stations/";
+  public static final String URL_STOPS_TXT = HEROKU_URL + "stops/";
+
   public static final String SCHEME = "content://";
 
   public static final String DATABASE_NAME = "busntrain.db";

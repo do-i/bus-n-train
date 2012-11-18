@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import org.djd.busntrain.train.TrainRouteActivity;
-import org.djd.busntrain.train.TrainTestActivity;
 
 public class MainActivity extends Activity {
 

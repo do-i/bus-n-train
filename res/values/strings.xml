@@ -21,6 +21,9 @@
     <string name="app_name">bus-n-train</string>
     <string name="msg_sys_no_case_defined_error">There is no case defined error occurred.</string>
     <string name="no_list_data">No data is available.</string>
+
+    <string name="train_tracker_base_url">http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?</string>
+    <string name="train_tracker_auth_key">508fc434e3144362839cc82709c6365a</string>
     
     <string name="bus_tracker_base_url">http://www.ctabustracker.com/bustime/api/v1/</string>
     <string name="bus_tracker_auth_key">PcgY9BruYFVN9ZbRtB3qKbeU3</string>

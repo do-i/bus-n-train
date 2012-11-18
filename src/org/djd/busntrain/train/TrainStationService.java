@@ -54,12 +54,9 @@ public class TrainStationService extends IntentService {
         }
       }
     }
-    if (stations != null) {
-      Log.i(TAG, stations.toString());
-    } else {
+    if (stations == null) {
       Log.e(TAG, "no stations available.");
     }
-
   }
 
   private void broadcast(ArrayList<StationModel> responseXmlTxt) {
