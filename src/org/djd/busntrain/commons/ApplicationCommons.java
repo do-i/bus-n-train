@@ -88,7 +88,7 @@ public final class ApplicationCommons {
 
   public enum ColorCode {
     Red(R.color.train_red), Blue(R.color.train_blue),
-    Brn(R.color.train_brown),G(R.color.train_green), O(R.color.train_orange),
+    Brn(R.color.train_brown),G(R.color.train_green), Org(R.color.train_orange),
     P(R.color.train_purple), Pink(R.color.train_pink), Y(R.color.train_yellow);
 
     final int colorId;

@@ -31,6 +31,10 @@ public class StationModel implements Serializable {
     return stopName;
   }
 
+  public String getDestination() {
+    return destination;
+  }
+
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder();

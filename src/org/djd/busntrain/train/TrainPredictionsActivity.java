@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import org.djd.busntrain.R;
+import org.djd.busntrain.commons.StringUtil;
 
 import java.util.ArrayList;
 
@@ -28,21 +30,26 @@ import static org.djd.busntrain.commons.ApplicationCommons.getColorDestination;
  * To change this template use File | Settings | File Templates.
  */
 public class TrainPredictionsActivity extends ListActivity {
-  private static final String TAG = TrainPredictionsActivity.class.getSimpleName();
   public static final String EXTRA_DATA_STATIONS_KEY = "EXTRA_DATA_STATIONS_KEY";
+  private static final String TAG = TrainPredictionsActivity.class.getSimpleName();
   private TrainPredictionActivityBroadcastReceiver receiver;
   private ArrayList<TrainPredictionsModel> trainPredictionsModels;
   private StationModel station;
+  private long lastUpdateTime;
+  private TextView lastUpdateTimeTextView;
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.train_prediction_list_view);
+    lastUpdateTimeTextView = (TextView) findViewById(R.id.train_last_update_time);
     receiver = new TrainPredictionActivityBroadcastReceiver();
     Intent intent = getIntent();
     if (intent != null) {
       station = (StationModel) intent.getSerializableExtra(EXTRA_DATA_STATIONS_KEY);
       callBusPredictionService();
     }
+    ((TextView) findViewById(R.id.train_prediction_direction)).setText(station.getDestination());
+    ((TextView) findViewById(R.id.train_prediction_stop_name)).setText(station.getStopName());
   }
 
   @Override
@@ -56,7 +63,6 @@ public class TrainPredictionsActivity extends ListActivity {
   protected void onResume() {
     super.onResume();
     super.registerReceiver(receiver, receiver.intentFilter);
-
   }
 
   @Override
@@ -69,6 +75,8 @@ public class TrainPredictionsActivity extends ListActivity {
 
   private void displayListItems() {
     ListAdapter listAdapter = new TrainPredictionsAdapter(this, trainPredictionsModels);
+    lastUpdateTime = System.currentTimeMillis();
+    lastUpdateTimeTextView.setText(StringUtil.timeToString(this, lastUpdateTime));
     setListAdapter(listAdapter);
   }
 
