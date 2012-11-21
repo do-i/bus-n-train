@@ -37,6 +37,7 @@ public class TrainPredictionService extends IntentService {
     String url = URL_STOPS_TXT + intent.getDataString();
     Reader reader = null;
     try {
+      Log.d(TAG, url);
       reader = new InputStreamReader(new URL(url).openStream());
       Integer parentStopId = new Gson().fromJson(reader, Integer.class);
       if (parentStopId != null) {

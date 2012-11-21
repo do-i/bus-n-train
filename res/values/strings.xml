@@ -57,4 +57,7 @@
     <string name="train_route_pink">Pink Line</string>
     <string name="train_route_yellow">Yellow Line</string>
 
+    <string name="lbl_train_open_parentice">(L </string>
+    <string name="lbl_train_close_parentice">)</string>
+
 </resources>

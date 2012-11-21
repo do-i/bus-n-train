@@ -30,6 +30,11 @@ public class TrainPredictionsModel implements Serializable {
   final String stpDe;
   final String prdt;
   final String arrT;
+  final String isDly;
+  final String rn;
+  final String rt;
+  final String destNm;
+
   final String minutes;
 
   public TrainPredictionsModel(Builder builder) {
@@ -40,6 +45,10 @@ public class TrainPredictionsModel implements Serializable {
     stpDe = builder.stpDe;
     prdt = builder.prdt;
     arrT = builder.arrT;
+    isDly = builder.isDly;
+    rn = builder.rn;
+    rt = builder.rt;
+    destNm = builder.destNm;
     minutes = TrainPredictionsModel.getMinute(builder);
   }
 
@@ -54,6 +63,9 @@ public class TrainPredictionsModel implements Serializable {
     sb.append(", stpDe='").append(stpDe).append('\'');
     sb.append(", prdt='").append(prdt).append('\'');
     sb.append(", arrT='").append(arrT).append('\'');
+    sb.append(", isDly='").append(isDly).append('\'');
+    sb.append(", rn='").append(rn).append('\'');
+    sb.append(", rt='").append(rt).append('\'');
     sb.append(", minutes='").append(minutes).append('\'');
     sb.append('}');
     return sb.toString();
@@ -63,6 +75,9 @@ public class TrainPredictionsModel implements Serializable {
 
   public static String getMinute(Builder builder) {
     try {
+      if("1".equals(builder.isDly)) {
+        return "Delayed";
+      }
       Date curDate = TIME_PATTERN.parse(builder.tmst);
       Date arrDate = TIME_PATTERN.parse(builder.arrT);
       long diffInMilliSec = arrDate.getTime() - curDate.getTime();
@@ -101,6 +116,11 @@ public class TrainPredictionsModel implements Serializable {
             .staNm(XmlUtil.getValue(element, "staNm"))
             .prdt(XmlUtil.getValue(element, "prdt"))
             .arrT(XmlUtil.getValue(element, "arrT"))
+            .stpDe(XmlUtil.getValue(element, "stpDe"))
+            .isDly(XmlUtil.getValue(element, "isDly"))
+            .rn(XmlUtil.getValue(element, "rn"))
+            .rt(XmlUtil.getValue(element, "rt"))
+            .destNm(XmlUtil.getValue(element, "destNm"))
             .build());
       }
       return trainPredictionsModels;
@@ -118,6 +138,10 @@ public class TrainPredictionsModel implements Serializable {
     private String stpDe;
     private String prdt;
     private String arrT;
+    private String isDly;
+    private String rn;
+    private String rt;
+    private String destNm;
 
     public Builder tmst(String tmst) {
       this.tmst = tmst;
@@ -151,6 +175,26 @@ public class TrainPredictionsModel implements Serializable {
 
     public Builder arrT(String arrT) {
       this.arrT = arrT;
+      return this;
+    }
+
+    public Builder isDly(String isDly) {
+      this.isDly = isDly;
+      return this;
+    }
+
+    public Builder rn(String rn) {
+      this.rn = rn;
+      return this;
+    }
+
+    public Builder rt(String rt) {
+      this.rt = rt;
+      return this;
+    }
+
+    public Builder destNm(String destNm) {
+      this.destNm = destNm;
       return this;
     }
 

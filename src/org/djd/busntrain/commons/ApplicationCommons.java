@@ -84,6 +84,24 @@ public final class ApplicationCommons {
         return "";
     }
   }
+
+
+  public enum ColorCode {
+    Red(R.color.train_red), Blue(R.color.train_blue),
+    Brn(R.color.train_brown),G(R.color.train_green), O(R.color.train_orange),
+    P(R.color.train_purple), Pink(R.color.train_pink), Y(R.color.train_yellow);
+
+    final int colorId;
+
+    ColorCode(int colorId) {
+      this.colorId = colorId;
+    }
+  }
+
+  public static int getColorIdByCode(String colorCode) {
+    return ColorCode.valueOf(colorCode).colorId;
+  }
+
   public static String getColorDestination(int viewId) {
     switch (viewId) {
       case R.id.train_route_red_id: return "Red/95th";
