@@ -40,7 +40,7 @@ public class StringUtil {
   public static String getTrainPredictionUrl(Context context, Integer stopId) {
     String url = context.getString(R.string.train_tracker_base_url);
     String key = context.getString(R.string.train_tracker_auth_key);
-    return String.format("%skey=%s&max=10&mapid=%d", url, key, stopId);
+    return String.format("%skey=%s&max=30&mapid=%d", url, key, stopId);
   }
 
 }

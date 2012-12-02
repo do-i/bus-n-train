@@ -34,6 +34,7 @@ public class Downloader {
   private static final HttpClient HTTP_CLIENT = new DefaultHttpClient();
 
   public static String getAsString(String url) throws DownloadException {
+    Log.d(TAG, url);
     HttpEntity httpEntity = makeHttpRequest(url).getEntity();
     try {
       return EntityUtils.toString(httpEntity);

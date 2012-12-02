@@ -87,7 +87,7 @@ public class TrainPredictionsActivity extends ListActivity {
     // TODO from stop data there is destination direction to sort order.
 
     ListAdapter listAdapter = new TrainPredictionsAdapter(this,
-        orderByDestination(stationsEntity.destination,
+        orderByDestination(getTrainDestinationName(stationsEntity.destination),
         filterByColor(trainPredictionsModels, COLOR_CODE_BY_COLOR_NAME.get(stationsEntity.color))));
     lastUpdateTime = System.currentTimeMillis();
     lastUpdateTimeTextView.setText(StringUtil.timeToString(this, lastUpdateTime));

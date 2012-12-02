@@ -36,7 +36,7 @@ public final class ApplicationCommons {
   public static final Map<ColorCode, String> COLOR_NAME_BY_COLOR_CODE;
 
   static {
-    COLOR_NAME_BY_COLOR_CODE = new HashMap<ColorCode, String>();
+    COLOR_NAME_BY_COLOR_CODE = new HashMap<ColorCode, String>(8);
     COLOR_NAME_BY_COLOR_CODE.put(ColorCode.Red, "Red");
     COLOR_NAME_BY_COLOR_CODE.put(ColorCode.Blue, "Blue");
     COLOR_NAME_BY_COLOR_CODE.put(ColorCode.Brn, "Brown");
@@ -50,7 +50,7 @@ public final class ApplicationCommons {
   public static final Map<String, ColorCode> COLOR_CODE_BY_COLOR_NAME;
 
   static {
-    COLOR_CODE_BY_COLOR_NAME = new HashMap<String, ColorCode>();
+    COLOR_CODE_BY_COLOR_NAME = new HashMap<String, ColorCode>(8);
     COLOR_CODE_BY_COLOR_NAME.put("Red", ColorCode.Red);
     COLOR_CODE_BY_COLOR_NAME.put("Blue", ColorCode.Blue);
     COLOR_CODE_BY_COLOR_NAME.put("Brown", ColorCode.Brn);
@@ -59,6 +59,16 @@ public final class ApplicationCommons {
     COLOR_CODE_BY_COLOR_NAME.put("Purple", ColorCode.P);
     COLOR_CODE_BY_COLOR_NAME.put("Pink", ColorCode.Pink);
     COLOR_CODE_BY_COLOR_NAME.put("Yellow", ColorCode.Y);
+  }
+
+  private static final Map<String, String> TRAIN_DESTINATION_NAME;
+
+  static {
+    TRAIN_DESTINATION_NAME = new HashMap<String, String>(16);
+    TRAIN_DESTINATION_NAME.put("ForestPark", "Forest Park");
+    TRAIN_DESTINATION_NAME.put("OHare", "O'Hare");
+    TRAIN_DESTINATION_NAME.put("95th", "95th/Dan Ryan");
+    TRAIN_DESTINATION_NAME.put("Howard", "Howard");
   }
 
   public static boolean isMoreThanOneYearOld(long lastUpateTime) {
@@ -200,6 +210,15 @@ public final class ApplicationCommons {
       default:
         Log.e(TAG, "Undefined viewId: " + viewId);
         return "";
+    }
+  }
+
+  public static String getTrainDestinationName(String destination) {
+    if (TRAIN_DESTINATION_NAME.containsKey(destination)) {
+      return TRAIN_DESTINATION_NAME.get(destination);
+    } else {
+      Log.w(TAG, "undefined key:" + destination);
+      return destination;
     }
   }
 
