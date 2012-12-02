@@ -1,13 +1,12 @@
 package org.djd.busntrain.train;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.djd.busntrain.R;
 import org.djd.busntrain.commons.StringUtil;
+import org.djd.busntrain.provider.TrainStationsContentProvider;
+import static org.djd.busntrain.commons.ApplicationCommons.*;
+import static org.djd.busntrain.train.TrainStationsEntity.Helper.filterByColor;
+import static org.djd.busntrain.train.TrainStationsEntity.Helper.orderByDestination;
 
 import java.util.ArrayList;
 
-import static org.djd.busntrain.commons.ApplicationCommons.getColorDestination;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +36,7 @@ public class TrainPredictionsActivity extends ListActivity {
   private static final String TAG = TrainPredictionsActivity.class.getSimpleName();
   private TrainPredictionActivityBroadcastReceiver receiver;
   private ArrayList<TrainPredictionsModel> trainPredictionsModels;
-  private StationModel station;
+  private TrainStationsEntity stationsEntity;
   private long lastUpdateTime;
   private TextView lastUpdateTimeTextView;
 
@@ -45,11 +47,17 @@ public class TrainPredictionsActivity extends ListActivity {
     receiver = new TrainPredictionActivityBroadcastReceiver();
     Intent intent = getIntent();
     if (intent != null) {
-      station = (StationModel) intent.getSerializableExtra(EXTRA_DATA_STATIONS_KEY);
+      long stationId = intent.getLongExtra(EXTRA_DATA_STATIONS_KEY, -1);
+      Cursor cursor = managedQuery(TrainStationsContentProvider.CONTENT_URI,
+          TrainStationsEntity.Columns.FULL_PROJECTION, String.format("_id=%d", stationId), null,
+          TrainStationsEntity.Columns._ID);
+      stationsEntity = TrainStationsEntity.Helper.toTrainStationsEntity(cursor, 0);
       callBusPredictionService();
+      ((TextView) findViewById(R.id.train_prediction_direction)).setText(stationsEntity.destination);
+      ((TextView) findViewById(R.id.train_prediction_stop_name)).setText(stationsEntity.stopName);
+    } else {
+      Log.e(TAG, "intent is null. Need to handle this in gracefully... hint: get it from savedInstanceState");
     }
-    ((TextView) findViewById(R.id.train_prediction_direction)).setText(station.getDestination());
-    ((TextView) findViewById(R.id.train_prediction_stop_name)).setText(station.getStopName());
   }
 
   @Override
@@ -74,15 +82,22 @@ public class TrainPredictionsActivity extends ListActivity {
   }
 
   private void displayListItems() {
-    ListAdapter listAdapter = new TrainPredictionsAdapter(this, trainPredictionsModels);
+    // TODO filter and sort trainPredictionsModels either here. order by is broken.
+    // TODO create stop table and download stops from HEROKU and cache them.
+    // TODO from stop data there is destination direction to sort order.
+
+    ListAdapter listAdapter = new TrainPredictionsAdapter(this,
+        orderByDestination(stationsEntity.destination,
+        filterByColor(trainPredictionsModels, COLOR_CODE_BY_COLOR_NAME.get(stationsEntity.color))));
     lastUpdateTime = System.currentTimeMillis();
     lastUpdateTimeTextView.setText(StringUtil.timeToString(this, lastUpdateTime));
     setListAdapter(listAdapter);
   }
 
   private void callBusPredictionService() {
+    Log.d(TAG, "stationEntity:" + stationsEntity);
     Intent intentService = new Intent(this, TrainPredictionService.class);
-    intentService.setData(Uri.parse(String.valueOf(station.getStopId())));
+    intentService.setData(Uri.parse(String.valueOf(stationsEntity.stopId)));
     startService(intentService);
   }
 

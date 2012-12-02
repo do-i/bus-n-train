@@ -143,7 +143,6 @@ public class BusRouteActivity extends ListActivity {
       private Cursor filteredCursor;
 
       public Cursor runQuery(CharSequence constraint) {
-
         if (constraint.equals(previous)) {
           Log.d(TAG, "skip requery.");
           return filteredCursor;
@@ -155,7 +154,6 @@ public class BusRouteActivity extends ListActivity {
         previous = constraint;
         return filteredCursor;
       }
-
     });
     setListAdapter(listAdapter);
   }

@@ -6,6 +6,7 @@ import static org.djd.busntrain.commons.ApplicationCommons.DATABASE_VERSION;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -18,7 +19,6 @@ public class AaaTableHelper extends SQLiteOpenHelper {
 
   public AaaTableHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
   }
 
   protected AaaTableHelper(Context context, boolean test) {
@@ -63,9 +63,7 @@ public class AaaTableHelper extends SQLiteOpenHelper {
    */
   public static interface Table {
     public void onCreate(SQLiteDatabase db);
-
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);
-
   }
 
   /**
@@ -75,6 +73,7 @@ public class AaaTableHelper extends SQLiteOpenHelper {
     ArrayList<Table> mTables = new ArrayList<Table>();
     mTables.add(new BusRouteTable());
     mTables.add(new BusFavoriteTable());
+    mTables.add(new TrainStationsTable());
     return mTables;
   }
 }

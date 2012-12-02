@@ -1,9 +1,13 @@
 package org.djd.busntrain.train;
 
 import android.app.IntentService;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import com.google.gson.Gson;
+import org.djd.busntrain.provider.TrainStationsContentProvider;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,8 +26,9 @@ import java.util.ArrayList;
 public class TrainStationService extends IntentService {
 
   private static final String TAG = TrainStationService.class.getSimpleName();
-
-  private static final String URL_STATIONS_TXT = "http://shielded-taiga-4473.herokuapp.com/v1/stations/";
+  private static final String URL_STATIONS_TXT =
+      "http://shielded-taiga-4473.herokuapp.com/v1/stations/";
+  private static final Gson gson = new Gson();
 
   public TrainStationService() {
     super(TAG);
@@ -32,15 +37,16 @@ public class TrainStationService extends IntentService {
   @Override
   protected void onHandleIntent(Intent intent) {
     Reader reader = null;
-    ArrayList<StationModel> stations = null;
-
-    String url = URL_STATIONS_TXT + intent.getDataString();
-    Log.d(TAG, "urltxt: "+url);
     try {
-      reader = new InputStreamReader(new URL(url).openStream());
-      stations = new Gson().fromJson(reader, StationModel.TYPE);
-      broadcast(stations);
-
+      reader = new InputStreamReader(new URL(URL_STATIONS_TXT).openStream());
+      ContentResolver contentResolver = super.getContentResolver();
+      for (TrainStationsEntity stationsEntity :
+          gson.<ArrayList<TrainStationsEntity>>fromJson(reader, TrainStationsEntity.TYPE)) {
+        Uri uri = contentResolver.insert(TrainStationsContentProvider.CONTENT_URI,
+            stationsEntity.getContentValuesForInsert());
+        Log.i(TAG, "rowId:" + ContentUris.parseId(uri));
+      }
+      broadcast();
     } catch (MalformedURLException e) {
       Log.e(TAG, e.getMessage());
     } catch (IOException e) {
@@ -54,16 +60,13 @@ public class TrainStationService extends IntentService {
         }
       }
     }
-    if (stations == null) {
-      Log.e(TAG, "no stations available.");
-    }
   }
 
-  private void broadcast(ArrayList<StationModel> responseXmlTxt) {
+  private void broadcast() {
     Intent responseIntent = new Intent();
-    responseIntent.setAction(TrainStationActivity.TrainStopActivityBroadcastReceiver.ACTION_RESPONSE);
+    responseIntent.setAction(
+        TrainStationActivity.TrainStopActivityBroadcastReceiver.ACTION_RESPONSE);
     responseIntent.addCategory(Intent.CATEGORY_DEFAULT);
-    responseIntent.putExtra(TrainStationActivity.TrainStopActivityBroadcastReceiver.EXTRA_DATA, responseXmlTxt);
     sendBroadcast(responseIntent);
   }
 }

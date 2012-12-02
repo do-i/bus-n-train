@@ -19,14 +19,15 @@ import static org.djd.busntrain.commons.ApplicationCommons.setTextToTextView;
  * Time: 10:46 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TrainStationAdapter extends ArrayAdapter<StationModel> {
+@Deprecated
+public class TrainStationAdapter extends ArrayAdapter<TrainStationsEntity> {
   private static final String TAG = TrainStationAdapter.class.getSimpleName();
-  private ArrayList<StationModel> stations;
+  private ArrayList<TrainStationsEntity> stationsEntities;
   private Context context;
 
-  public TrainStationAdapter(Context context, ArrayList<StationModel> stations) {
-    super(context, R.layout.train_stop_list_item_view, stations);
-    this.stations = stations;
+  public TrainStationAdapter(Context context, ArrayList<TrainStationsEntity> stationsEntities) {
+    super(context, R.layout.train_stop_list_item_view, stationsEntities);
+    this.stationsEntities = stationsEntities;
     this.context = context;
   }
 
@@ -38,10 +39,10 @@ public class TrainStationAdapter extends ArrayAdapter<StationModel> {
       view = inflater.inflate(R.layout.train_stop_list_item_view, null);
       Log.w(TAG, "view was null.");
     }
-    StationModel stationModel = stations.get(position);
-    if (stationModel != null) {
-      setTextToTextView(view, R.id.train_stop_name_id, stationModel.getStopName());
-      setTextToTextView(view, R.id.train_stop_id, stationModel.getStopId());
+    TrainStationsEntity stationsEntity = stationsEntities.get(position);
+    if (stationsEntity != null) {
+      setTextToTextView(view, R.id.train_stop_name_id, stationsEntity.stopName);
+      setTextToTextView(view, R.id.train_stop_id, stationsEntity.stopId);
     }
     return view;
   }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * Time: 4:23 PM
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class StationModel implements Serializable {
 
   public static final Type TYPE = new TypeToken<ArrayList<StationModel>>() {
@@ -31,9 +32,18 @@ public class StationModel implements Serializable {
     return stopName;
   }
 
+  public String getColor() {
+    return color;
+  }
+
   public String getDestination() {
     return destination;
   }
+
+  public int getSequence() {
+    return sequence;
+  }
+
 
   @Override
   public String toString() {

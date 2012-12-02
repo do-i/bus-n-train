@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import org.djd.busntrain.R;
 
-import static org.djd.busntrain.commons.ApplicationCommons.getColorDestination;
+import static org.djd.busntrain.commons.ApplicationCommons.getColorWithoutDestination;
 
 /**
  * View for picking a color.
@@ -26,7 +26,7 @@ public class TrainRouteActivity extends Activity {
 
   public void onClick(View v) {
     Intent intent = new Intent(this, TrainStationActivity.class);
-    intent.setData(Uri.parse(getColorDestination(v.getId())));
+    intent.setData(Uri.parse(getColorWithoutDestination(v.getId())));
     startActivity(intent);
   }
 }
