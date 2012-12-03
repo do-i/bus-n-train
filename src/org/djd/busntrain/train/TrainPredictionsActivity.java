@@ -82,9 +82,9 @@ public class TrainPredictionsActivity extends ListActivity {
   }
 
   private void displayListItems() {
+    // TODO from stop data there is destination direction to sort order.
     // TODO filter and sort trainPredictionsModels either here. order by is broken.
     // TODO create stop table and download stops from HEROKU and cache them.
-    // TODO from stop data there is destination direction to sort order.
 
     ListAdapter listAdapter = new TrainPredictionsAdapter(this,
         orderByDestination(getTrainDestinationName(stationsEntity.destination),

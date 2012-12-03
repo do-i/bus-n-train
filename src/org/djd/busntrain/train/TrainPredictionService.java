@@ -1,12 +1,15 @@
 package org.djd.busntrain.train;
 
 import android.app.IntentService;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.util.Log;
 import com.google.gson.Gson;
 import org.djd.busntrain.commons.DownloadException;
 import org.djd.busntrain.commons.Downloader;
 import org.djd.busntrain.commons.StringUtil;
+import org.djd.busntrain.provider.TrainStopsContentProvider;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,28 +37,23 @@ public class TrainPredictionService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
-    String url = URL_STOPS_TXT + intent.getDataString();
-    Reader reader = null;
+    Cursor cursor = null;
     try {
-      Log.d(TAG, url);
-      reader = new InputStreamReader(new URL(url).openStream());
-      Integer parentStopId = new Gson().fromJson(reader, Integer.class);
+      cursor = getContentResolver().query(TrainStopsContentProvider.CONTENT_URI,
+          TrainStopsEntity.Columns.FULL_PROJECTION,
+          String.format("%s='%s'", TrainStopsEntity.Columns.STOP_ID, intent.getDataString()), null,
+          TrainStopsEntity.Columns._ID);
+      cursor.moveToPosition(0);
+      Integer parentStopId = cursor.getInt(cursor.getColumnIndex(TrainStopsEntity.Columns.PARENT_STOP_ID));
+      cursor.close();
       if (parentStopId != null) {
         broadcast(Downloader.getAsString(StringUtil.getTrainPredictionUrl(this, parentStopId)));
       }
-    } catch (MalformedURLException e) {
-      Log.e(TAG, e.getMessage());
-    } catch (IOException e) {
-      Log.e(TAG, e.getMessage());
     } catch (DownloadException e) {
       Log.e(TAG, e.getMessage());
     } finally {
-      if (reader != null) {
-        try {
-          reader.close();
-        } catch (IOException e) {
-          Log.e(TAG, e.getMessage());
-        }
+      if (cursor != null) {
+        cursor.close();
       }
     }
   }

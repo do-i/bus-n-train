@@ -21,12 +21,13 @@ public final class ApplicationCommons {
   public static final String SCHEME = "content://";
 
   public static final String DATABASE_NAME = "busntrain.db";
-  public static final int DATABASE_VERSION = 3;
+  public static final int DATABASE_VERSION = 4;
 
   public static final String PREFERENCE_FILE_NAME = "BUSNTRAIN_APPLICATION_PREFERENCE_FILE_NAME";
+  public static final String PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME = "PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME";
   public static final String PREFERENCE_KEY_BUS_ROUTE_LAST_UPDATE_TIME = "PREFERENCE_KEY_BUS_ROUTE_LAST_UPDATE_TIME";
   public static final String PREFERENCE_KEY_TRAIN_STATIONS_LAST_UPDATE_TIME = "PREFERENCE_KEY_TRAIN_STATIONS_LAST_UPDATE_TIME";
-  public static final String PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME = "PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME";
+  public static final String PREFERENCE_KEY_TRAIN_STOPS_LAST_UPDATE_TIME = "PREFERENCE_KEY_TRAIN_STOPS_LAST_UPDATE_TIME";
 
   public static final long ONE_DAY_IN_MILLISECONDS = 86400000;
   public static final long ONE_WEEK_IN_MILLISECONDS = ONE_DAY_IN_MILLISECONDS * 7;
@@ -229,9 +230,10 @@ public final class ApplicationCommons {
   private static void checkDatabaseChanged(final Context context) {
     SharedPreferences settings = getSharedPreferences(context);
     if (DATABASE_VERSION != settings.getInt(PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME, 0)) {
+      settings.edit().putInt(PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME, DATABASE_VERSION).commit();
       settings.edit().putLong(PREFERENCE_KEY_BUS_ROUTE_LAST_UPDATE_TIME, 0).commit();
       settings.edit().putLong(PREFERENCE_KEY_TRAIN_STATIONS_LAST_UPDATE_TIME, 0).commit();
-      settings.edit().putInt(PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME, DATABASE_VERSION).commit();
+      settings.edit().putLong(PREFERENCE_KEY_TRAIN_STOPS_LAST_UPDATE_TIME, 0).commit();
     }
   }
 }

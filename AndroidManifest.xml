@@ -39,5 +39,7 @@
                   android:authorities="org.djd.busntrain.provider.busfavoritecontentprovider"/>
         <provider android:name=".provider.TrainStationsContentProvider"
                   android:authorities="org.djd.busntrain.provider.trainstationscontentprovider"/>
+        <provider android:name=".provider.TrainStopsContentProvider"
+                  android:authorities="org.djd.busntrain.provider.trainstopscontentprovider"/>
     </application>
 </manifest>

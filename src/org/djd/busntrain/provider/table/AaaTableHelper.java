@@ -74,6 +74,7 @@ public class AaaTableHelper extends SQLiteOpenHelper {
     mTables.add(new BusRouteTable());
     mTables.add(new BusFavoriteTable());
     mTables.add(new TrainStationsTable());
+    mTables.add(new TrainStopsTable());
     return mTables;
   }
 }
