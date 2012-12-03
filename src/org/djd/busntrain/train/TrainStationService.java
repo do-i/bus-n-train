@@ -47,7 +47,7 @@ public class TrainStationService extends IntentService {
           gson.<ArrayList<TrainStationsEntity>>fromJson(reader, TrainStationsEntity.TYPE)) {
         Uri uri = contentResolver.insert(TrainStationsContentProvider.CONTENT_URI,
             stationsEntity.getContentValuesForInsert());
-        Log.i(TAG, "rowId:" + ContentUris.parseId(uri));
+        Log.i(TAG, "1.rowId:" + ContentUris.parseId(uri));
       }
       Log.d(TAG, "stations download done.");
       reader.close();
@@ -56,7 +56,7 @@ public class TrainStationService extends IntentService {
           gson.<ArrayList<TrainStopsEntity>>fromJson(reader, TrainStopsEntity.TYPE)) {
         Uri uri = contentResolver.insert(TrainStopsContentProvider.CONTENT_URI,
             trainStopsEntity.getContentValuesForInsert());
-        Log.i(TAG, "rowId:" + ContentUris.parseId(uri));
+        Log.i(TAG, "2.rowId:" + ContentUris.parseId(uri));
       }
       broadcast();
     } catch (MalformedURLException e) {

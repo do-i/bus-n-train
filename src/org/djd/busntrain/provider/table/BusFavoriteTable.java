@@ -29,9 +29,9 @@ class BusFavoriteTable implements Table {
 
   @Override
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    Log.i(TAG, "Android called onUpgrade() method.");
-    db.execSQL(BUS_FAVORITE_TABLE_DROP_SQL);
-    onCreate(db);
+//    Log.i(TAG, "Android called onUpgrade() method.");
+//    db.execSQL(BUS_FAVORITE_TABLE_DROP_SQL);
+//    onCreate(db);
   }
 
 }

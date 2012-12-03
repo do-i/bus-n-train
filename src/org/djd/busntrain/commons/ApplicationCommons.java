@@ -21,7 +21,7 @@ public final class ApplicationCommons {
   public static final String SCHEME = "content://";
 
   public static final String DATABASE_NAME = "busntrain.db";
-  public static final int DATABASE_VERSION = 4;
+  public static final int DATABASE_VERSION = 6;
 
   public static final String PREFERENCE_FILE_NAME = "BUSNTRAIN_APPLICATION_PREFERENCE_FILE_NAME";
   public static final String PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME = "PREFERENCE_KEY_DATABASE_LAST_UPDATE_TIME";
@@ -80,6 +80,11 @@ public final class ApplicationCommons {
   public static boolean isMoreThanOneDayOld(long lastUpateTime) {
     long diff = System.currentTimeMillis() - lastUpateTime;
     return ONE_DAY_IN_MILLISECONDS < diff;
+  }
+
+  public static boolean isMoreThanEnoughOld(long lastUpateTime) {
+    Log.w(TAG, "Don't forget to change to isMoreThanOneYearOld after finish debugging!!");
+    return true;
   }
 
   public static long getBusRouteLastUpdate(final Context context) {

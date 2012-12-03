@@ -2,7 +2,6 @@ package org.djd.busntrain.train;
 
 import android.app.ListActivity;
 import android.content.BroadcastReceiver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,17 +10,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-import org.apache.http.client.utils.URIUtils;
 import org.djd.busntrain.R;
-import org.djd.busntrain.bus.BusRouteService;
 import org.djd.busntrain.commons.ApplicationCommons;
 import org.djd.busntrain.provider.TrainStationsContentProvider;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -36,7 +31,6 @@ public class TrainStationActivity extends ListActivity {
   private static final int[] VIEW_STATION_ID_ARRAY = new int[]{R.id.train_stop_id, R.id.train_stop_name_id};
   private TrainStopActivityBroadcastReceiver receiver;
   private Uri uri;
-  private SimpleCursorAdapter listAdapter;
   private boolean dateNeedsUpdate;
 
   @Override
@@ -88,6 +82,7 @@ public class TrainStationActivity extends ListActivity {
     Cursor cursor = managedQuery(TrainStationsContentProvider.CONTENT_URI,
         TrainStationsEntity.Columns.FULL_PROJECTION, String.format("color='%s'", uri.toString()),
         null, TrainStationsEntity.Columns._ID);
+
     setListAdapter(new SimpleCursorAdapter(this, R.layout.train_stop_list_item_view, cursor,
         TrainStationsEntity.Columns.LIST_VIEW_PROJECTION, VIEW_STATION_ID_ARRAY));
   }

@@ -18,9 +18,10 @@ class TrainStationsTable implements Table {
   private static final String TRAIN_STATIONS_TABLE_DROP_SQL =
       String.format("DROP TABLE IF EXISTS  %s", TRAIN_STATIONS_TABLE_NAME);
   private static final String TRAIN_STATIONS_TABLE_CREATE_SQL = String.format(
-      "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s INTEGER UNIQUE, %s TEXT, " +
-          "%s TEXT, %s TEXT, %s INTEGER);",
-      TRAIN_STATIONS_TABLE_NAME, _ID, STOP_ID, STOP_NAME, COLOR, DESTINATION, SEQUENCE);
+      "CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s INTEGER, %s TEXT, " +
+          "%s TEXT, %s TEXT, %s INTEGER, UNIQUE (%s, %s) ON CONFLICT REPLACE);",
+      TRAIN_STATIONS_TABLE_NAME, _ID, STOP_ID, STOP_NAME, COLOR, DESTINATION, SEQUENCE,
+      STOP_ID, COLOR );
 
   public TrainStationsTable() {
     Log.i(TAG, "table is created.");
