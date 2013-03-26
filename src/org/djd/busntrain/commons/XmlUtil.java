@@ -40,7 +40,6 @@ public class XmlUtil {
       Log.e(TAG, e.getMessage(), e);
       throw new XmlUtilException(ERROR_CODE.IO_ERROR);
     }
-
   }
 
   public static String getValue(Element element, String elementName) {
@@ -49,14 +48,12 @@ public class XmlUtil {
       throw new IllegalStateException("TODO: handle when elements does not contain exactly one item.elementName=" + elementName);
     }
     Node elementNode = elements.item(0);
-
     NodeList children = elementNode.getChildNodes();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < children.getLength(); i++) {
       String value = children.item(i).getNodeValue();
       sb.append(value);
     }
-
     return sb.toString();
   }
 }
